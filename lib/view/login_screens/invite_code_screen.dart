@@ -8,9 +8,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../main.dart';
-import '../core/theme/app_colors.dart';
-import '../core/theme/app_text_styles.dart';
+import '../../../main.dart';
+import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_text_styles.dart';
 
 
 class InviteCodeScreen extends ConsumerStatefulWidget {
@@ -131,8 +131,8 @@ class _VerificationScreenConsumerState
                       borderRadius: BorderRadius.circular(40),
                       color: isWrongCode ? theme.errorRedColor : theme.greyBorderColor,
                     ),
-                    width: 14,
-                    height: 14,
+                    width: 30,
+                    height: 30,
                     child: Center(
                         child: TextFormField(
                           onChanged: (value) {
@@ -145,6 +145,8 @@ class _VerificationScreenConsumerState
                             }
                           },
                           decoration: const InputDecoration(
+                            isDense: true,
+                            contentPadding: EdgeInsets.zero,
                             border: InputBorder.none,
                           ),
                           textAlign: TextAlign.center,
@@ -160,43 +162,8 @@ class _VerificationScreenConsumerState
                       borderRadius: BorderRadius.circular(40),
                       color: isWrongCode ? theme.errorRedColor : theme.greyBorderColor,
                     ),
-                    width: 14,
-                    height: 14,
-                    child: Center(
-                        child: TextFormField(
-                          onChanged: (value) {
-                            setState(() {
-                              // String nevalue = ("$code$value");
-                              //
-                              // code = nevalue;
-                            });
-                            if (value.length == 1) {
-                              FocusScope.of(context).nextFocus();
-                            } else {
-                              if (value.isEmpty) {
-                                FocusScope.of(context).previousFocus();
-                              }
-                            }
-                          },
-                          onSaved: (newValue3) {},
-                          decoration: const InputDecoration(
-                            border: InputBorder.none,
-                          ),
-                          textAlign: TextAlign.center,
-                          keyboardType: TextInputType.number,
-                          inputFormatters: [
-                            LengthLimitingTextInputFormatter(1),
-                            FilteringTextInputFormatter.digitsOnly
-                          ],
-                        )),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(40),
-                      color: isWrongCode ? theme.errorRedColor : theme.greyBorderColor,
-                    ),
-                    width: 14,
-                    height: 14,
+                    width: 30,
+                    height: 30,
                     child: Center(
                         child: TextFormField(
                           onChanged: (value) {
@@ -230,8 +197,8 @@ class _VerificationScreenConsumerState
                       borderRadius: BorderRadius.circular(40),
                       color: isWrongCode ? theme.errorRedColor : theme.greyBorderColor,
                     ),
-                    width: 14,
-                    height: 14,
+                    width: 30,
+                    height: 30,
                     child: Center(
                         child: TextFormField(
                           onChanged: (value) {
@@ -250,6 +217,8 @@ class _VerificationScreenConsumerState
                           },
                           onSaved: (newValue3) {},
                           decoration: const InputDecoration(
+                            isDense: true,
+                            contentPadding: EdgeInsets.zero,
                             border: InputBorder.none,
                           ),
                           textAlign: TextAlign.center,
@@ -265,8 +234,45 @@ class _VerificationScreenConsumerState
                       borderRadius: BorderRadius.circular(40),
                       color: isWrongCode ? theme.errorRedColor : theme.greyBorderColor,
                     ),
-                    width: 14,
-                    height: 14,
+                    width: 30,
+                    height: 30,
+                    child: Center(
+                        child: TextFormField(
+                          onChanged: (value) {
+                            setState(() {
+                              // String nevalue = ("$code$value");
+                              //
+                              // code = nevalue;
+                            });
+                            if (value.length == 1) {
+                              FocusScope.of(context).nextFocus();
+                            } else {
+                              if (value.isEmpty) {
+                                FocusScope.of(context).previousFocus();
+                              }
+                            }
+                          },
+                          onSaved: (newValue3) {},
+                          decoration: const InputDecoration(
+                            isDense: true,
+                            contentPadding: EdgeInsets.zero,
+                            border: InputBorder.none,
+                          ),
+                          textAlign: TextAlign.center,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(1),
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
+                        )),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(40),
+                      color: isWrongCode ? theme.errorRedColor : theme.greyBorderColor,
+                    ),
+                    width: 30,
+                    height: 30,
                     child: Center(
                         child: TextFormField(
                           onChanged: (value) {
@@ -285,6 +291,8 @@ class _VerificationScreenConsumerState
                           },
                           onSaved: (newValue4) {},
                           decoration: const InputDecoration(
+                            isDense: true,
+                            contentPadding: EdgeInsets.zero,
                             border: InputBorder.none,
                           ),
                           textAlign: TextAlign.center,
@@ -300,8 +308,8 @@ class _VerificationScreenConsumerState
                       borderRadius: BorderRadius.circular(40),
                       color: isWrongCode ? theme.errorRedColor : theme.greyBorderColor,
                     ),
-                    width: 14,
-                    height: 14,
+                    width: 30,
+                    height: 30,
                     child: Center(
                         child: TextFormField(
                           onChanged: (value) {
@@ -320,6 +328,8 @@ class _VerificationScreenConsumerState
                           },
                           onSaved: (newValue5) {},
                           decoration: const InputDecoration(
+                            isDense: true,
+                            contentPadding: EdgeInsets.zero,
                             border: InputBorder.none,
                           ),
                           textAlign: TextAlign.center,
@@ -332,11 +342,11 @@ class _VerificationScreenConsumerState
                   ),
                   Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(40),
+                      borderRadius: BorderRadius.circular(30),
                       color: isWrongCode ? theme.errorRedColor : theme.greyBorderColor,
                     ),
-                    width: 14,
-                    height: 14,
+                    width: 30,
+                    height: 30,
                     child: Center(
                         child: TextFormField(
                           onChanged: (value) {
@@ -355,6 +365,8 @@ class _VerificationScreenConsumerState
                           },
                           onSaved: (newValue6) {},
                           decoration: const InputDecoration(
+                            isDense: true,
+                            contentPadding: EdgeInsets.zero,
                             border: InputBorder.none,
                           ),
                           textAlign: TextAlign.center,

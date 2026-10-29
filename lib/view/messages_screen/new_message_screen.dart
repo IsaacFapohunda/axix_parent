@@ -1,17 +1,19 @@
 
+import 'package:axix_parent_app/view/messages_screen/chat_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class NewMessageBottomSheet extends StatefulWidget {
+class NewMessageBottomSheet extends ConsumerStatefulWidget {
   const NewMessageBottomSheet({super.key});
 
   @override
-  State<NewMessageBottomSheet> createState() =>
+  ConsumerState<NewMessageBottomSheet> createState() =>
       _NewMessageBottomSheetState();
 }
 
 class _NewMessageBottomSheetState
-    extends State<NewMessageBottomSheet> {
+    extends ConsumerState<NewMessageBottomSheet> {
   final TextEditingController searchController =
   TextEditingController();
 
@@ -205,7 +207,7 @@ class _NewMessageBottomSheetState
                                 name: filteredTeachers[i]['name'],
                                 role: filteredTeachers[i]['role'],
                                 initials: filteredTeachers[i]['initials'],
-                                color: filteredTeachers[i]['color'],
+                                color: filteredTeachers[i]['color'] as Color,
                                 showDivider:
                                 i < filteredTeachers.length - 1,
                               ),
@@ -276,6 +278,14 @@ class _NewMessageBottomSheetState
         // Close the bottom sheet when a contact is selected.
         Navigator.pop(context);
 
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => ChatScreen(name: name,
+                role: role, initials: initials!, avatarColor: color as Color)
+          ),
+        );
         // Navigate to your chat screen here if required.
       },
       child: Container(

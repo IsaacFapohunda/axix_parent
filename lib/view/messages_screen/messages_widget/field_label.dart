@@ -1,16 +1,17 @@
 import 'package:flutter/cupertino.dart';
 
 class FieldLabel extends StatelessWidget {
-  final String text;
+  final String label;
 
-  const FieldLabel(this.text);
+
+  const FieldLabel(this.label, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 6),
       child: Text(
-        text,
+        label,
         style: const TextStyle(
           fontSize: 11,
           fontWeight: FontWeight.w600,

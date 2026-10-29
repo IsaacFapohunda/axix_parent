@@ -1,14 +1,14 @@
 
 import 'package:axix_parent_app/core/utils/app_svgs.dart';
-import 'package:axix_parent_app/view/pin_login.dart';
+import 'package:axix_parent_app/view/login_screens/pin_login.dart';
 import 'package:axix_parent_app/view/widgets/app_button.dart';
 import 'package:axix_parent_app/view/widgets/back_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../core/theme/app_colors.dart';
-import '../core/theme/app_text_styles.dart';
+import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_text_styles.dart';
 
 
 class ParentChildSelectionScreen extends ConsumerStatefulWidget {
@@ -43,37 +43,21 @@ class _ParentChildSelectionScreenState
 
     return Scaffold(
       backgroundColor: theme.scaffoldColor,
-      // appBar: AppBar(
-      //   backgroundColor: theme.scaffoldColor,
-      //   elevation: 0,
-      //   leading:
-      //
-      // ),
+      appBar: AppBar(
+        toolbarHeight: 83,
+        backgroundColor: theme.scaffoldColor,
+        title: AppBackButton(textStyle: textTheme.appBarBackColor(theme)),
+      ),
+
       body: SafeArea(
         top: false,
-        //minimum: EdgeInsets.only(top: 20),
         child: Padding(
           padding: const EdgeInsets.fromLTRB(32, 48, 32, 48),
           child: Column(
             children: [
-
-                 Padding(
-           padding: const EdgeInsets.only(top: 46, ),
-           child: Row(
-             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-             children: [
-               AppBackButton(
-                        textStyle: textTheme.appBarBackColor(theme),
-                      ),
-             ],
-           ),
-                 ),
-
-
               LayoutBuilder(
                 builder: (context, constraints) {
                   return SingleChildScrollView(
-                    //padding: const EdgeInsets.fromLTRB(24, 24, 24, 24),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -145,17 +129,14 @@ class _ParentChildSelectionScreenState
                                 child: Row(
                                   children: [
                                     CircleAvatar(
-                                      radius: 14,
-                                      backgroundColor: theme.primary2Color,
+                                      radius: 24,
+                                      backgroundColor: AppThemeController.getAvatarColor('name'),
                                       child: Text(
                                         child['initials']!,
-                                        style: TextStyle(
-                                          fontSize: 10,
-                                          color: theme.primaryColor,
-                                          fontWeight: FontWeight.w600,
-                                        ),
+                                        style: textTheme.whiteText(context, fontSize: 14, fontweight: FontWeight.w700)
                                       ),
                                     ),
+
 
                                     const SizedBox(width: 10),
 
@@ -166,19 +147,12 @@ class _ParentChildSelectionScreenState
                                         children: [
                                           Text(
                                             child['name']!,
-                                            style: const TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w600,
-                                              color: Color(0xFF101828),
-                                            ),
+                                            style: textTheme.headingBlack(context, fontSize: 15, fontweight: FontWeight.w600),
                                           ),
                                           const SizedBox(height: 4),
                                           Text(
                                             child['class']!,
-                                            style: const TextStyle(
-                                              fontSize: 9,
-                                              color: Color(0xFF98A2B3),
-                                            ),
+                                            style: textTheme.bodyGrey(context, fontweight: FontWeight.w500, fontSize: 12),
                                           ),
                                         ],
                                       ),
@@ -199,12 +173,9 @@ class _ParentChildSelectionScreenState
 
                         Wrap(
                           children: [
-                            const Text(
+                            Text(
                               'Not your child, or one is missing? ',
-                              style: TextStyle(
-                                fontSize: 10,
-                                color: Color(0xFF667085),
-                              ),
+                              style: textTheme.body3ColorText(theme),
                             ),
                             GestureDetector(
                               onTap: () {
@@ -212,38 +183,34 @@ class _ParentChildSelectionScreenState
                               },
                               child: Text(
                                 'Tell the school',
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: theme.primaryColor,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                                style: textTheme.smallTextWithPrimaryColor(theme),
                               ),
                             ),
                           ],
-                        ),
-
-                        const SizedBox(height: 41),
-
-                        AppButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => ParentPinScreen(
-                                  childName: children[selectedChild]['name']!,
-                                ),
-                              ),
-                            );
-                          },
-                          label: 'Continue',
-                          buttonColor: theme.primaryColor,
-                          textStyle:
-                          textTheme.bodyWithOffWhiteColor(theme),
                         ),
                       ],
                     ),
                   );
                 },
+              ),
+
+
+              Spacer(),
+              AppButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => ParentPinScreen(
+                        childName: children[selectedChild]['name']!,
+                      ),
+                    ),
+                  );
+                },
+                label: 'Continue',
+                buttonColor: theme.primaryColor,
+                textStyle:
+                textTheme.bodyWithOffWhiteColor(theme),
               ),
             ],
           ),

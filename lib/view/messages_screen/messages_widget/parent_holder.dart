@@ -11,8 +11,8 @@ Widget parentHeader(BuildContext context, WidgetRef ref) {
   final appThemeColor = ref.watch(appThemeProvider);
   final appTextThemeProvider = ref.watch(appTextProvider);
 
-  return Padding(
-    padding: const EdgeInsets.only(top: 39.5, left: 24, right: 24),
+  return Container(
+    //color: Colors.red,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [

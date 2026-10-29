@@ -54,10 +54,11 @@ class AppTextStyles extends ChangeNotifier{
 
 
 
-   TextStyle bodyGrey(BuildContext context) {
+   TextStyle bodyGrey(BuildContext context, {FontWeight fontweight = FontWeight.w500,
+     double fontSize = 14, }) {
     return GoogleFonts.inter(
-      fontSize: 14,
-      fontWeight: FontWeight.w500,
+      fontSize: fontSize,
+      fontWeight: fontweight,
       color: Theme.of(context).colorScheme.onTertiary,
     );
   }
@@ -86,10 +87,10 @@ class AppTextStyles extends ChangeNotifier{
     );
   }
 
-   TextStyle body2ColorText(AppThemeController theme){
+   TextStyle body2ColorText(AppThemeController theme, {double fontSize = 12, FontWeight fontweight = FontWeight.w400}){
     return GoogleFonts.inter(
-      fontSize: 12,
-      fontWeight: FontWeight.w400,
+      fontSize: fontSize,
+      fontWeight: fontweight,
       color: theme.body2Color,
     );
   }
@@ -103,10 +104,10 @@ class AppTextStyles extends ChangeNotifier{
     );
   }
 
-   TextStyle smallTextWithPrimaryColor(AppThemeController theme){
+   TextStyle smallTextWithPrimaryColor(AppThemeController theme, {double fontSize = 13, FontWeight fontweight = FontWeight.w500 }){
     return GoogleFonts.inter(
-      fontSize: 13,
-      fontWeight: FontWeight.w500,
+      fontSize: fontSize,
+      fontWeight: fontweight,
       color: theme.primaryColor,
     );
   }

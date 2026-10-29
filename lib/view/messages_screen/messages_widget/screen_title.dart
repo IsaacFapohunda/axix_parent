@@ -15,15 +15,12 @@ Widget screenTitle(
   final appThemeColor = ref.watch(appThemeProvider);
   final appTextThemeProvider = ref.watch(appTextProvider);
 
-  return Padding(
-    padding: const EdgeInsets.fromLTRB(20, 0, 20, 14),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(title, style: appTextThemeProvider.headingBlack(context)),
-        const SizedBox(height: 3),
-        Text(subtitle, style: appTextThemeProvider.bodyGrey(context)),
-      ],
-    ),
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(title, style: appTextThemeProvider.headingBlack(context)),
+      const SizedBox(height: 4),
+      Text(subtitle, style: appTextThemeProvider.bodyGrey(context)),
+    ],
   );
 }

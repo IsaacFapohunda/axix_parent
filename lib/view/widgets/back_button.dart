@@ -26,36 +26,33 @@ class AppBackButton extends ConsumerWidget {
         Navigator.of(context).pop();
       },
       borderRadius: BorderRadius.circular(8),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(left: 10),
-              height: 35,
-              width: 35,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  width: 1.0,
-                  color: theme.greyBorderColor,
-                ),
-                shape: BoxShape.circle,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            margin: const EdgeInsets.only(left: 10),
+            height: 35,
+            width: 35,
+            decoration: BoxDecoration(
+              border: Border.all(
+                width: 1.0,
+                color: theme.greyBorderColor,
               ),
-              child:  Center(
-                child: Icon(
-                  Icons.arrow_back,
-                  color: theme.bodyColor,
-                ),
+              shape: BoxShape.circle,
+            ),
+            child:  Center(
+              child: Icon(
+                Icons.arrow_back,
+                color: theme.bodyColor,
               ),
             ),
+          ),
 
-            if (showLabel) ...[
-              const SizedBox(width: 8,),
-              Text(label, style: textStyle,)
-            ]
-          ],
-        ),
+          if (showLabel) ...[
+            const SizedBox(width: 8,),
+            Text(label, style: textStyle,)
+          ]
+        ],
       ),
     );
   }

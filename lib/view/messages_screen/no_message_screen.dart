@@ -1,74 +1,36 @@
 
-import 'package:axix_parent_app/view/home_screen.dart';
-import 'package:axix_parent_app/view/messages/parent_dashboard_screen.dart';
+import 'package:axix_parent_app/core/utils/app_svgs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_text_styles.dart';
+import '../login_screens/home_screen.dart';
 import 'chat_screen.dart';
+import 'events_screen.dart';
+import 'meeting_screen.dart';
 import 'messages_widget/bordered_input.dart';
 import 'messages_widget/green_button.dart';
 import 'messages_widget/parent_holder.dart';
 import 'messages_widget/screen_title.dart';
-import 'new_message_screen.dart';
 
-class ParentMessagesScreen extends ConsumerStatefulWidget {
-  const ParentMessagesScreen({super.key});
+class NoMessageScreen extends ConsumerStatefulWidget {
+  const NoMessageScreen({super.key});
 
   @override
-  ConsumerState<ParentMessagesScreen> createState() => _ParentMessagesScreenState();
+  ConsumerState<NoMessageScreen> createState() => _NoMessageScreenState();
 }
 
-class _ParentMessagesScreenState extends ConsumerState<ParentMessagesScreen> {
+class _NoMessageScreenState extends ConsumerState<NoMessageScreen> {
   int selectedTab = 0;
-
-  final List<Map<String, dynamic>> messages = [
-    {
-      'name': 'Mr. Adebayo Okafor',
-      'role': 'Class teacher',
-      'message': 'Thanks - I’ll share the Physics practical...',
-      'time': '15:55',
-      'initials': 'MA',
-      'color': const Color(0xFFB42318),
-      'unread': true,
-    },
-    {
-      'name': 'Bursary',
-      'role': 'Accounts office',
-      'message': 'Your payment plan request has been received.',
-      'time': '15:55',
-      'initials': 'B',
-      'color': const Color(0xFF2C93FF),
-      'unread': false,
-    },
-    {
-      'name': 'Mrs. Funmi Adeyemi',
-      'role': 'Class teacher',
-      'message': 'Child did very well in the spelling quiz...',
-      'time': 'Apr 6',
-      'initials': 'MF',
-      'color': const Color(0xFF1A7A4A),
-      'unread': false,
-    },
-    {
-      'name': 'School Nurse',
-      'role': 'Clinic',
-      'message': 'Please remember to update the health form.',
-      'time': 'Apr 6',
-      'initials': 'N',
-      'color': const Color(0xFFF59E0B),
-      'unread': false,
-    },
-  ];
 
   @override
   Widget build(BuildContext context) {
 
     final appColortheme = ref.watch(appThemeProvider);
     final appTextThemeProvider = ref.watch(appTextProvider);
-
 
     return Scaffold(
       appBar: AppBar(
@@ -99,28 +61,54 @@ class _ParentMessagesScreenState extends ConsumerState<ParentMessagesScreen> {
           ),
           const SizedBox(height: 14),
           if (selectedTab == 0) ...[
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: borderedInput(
-                hint: 'Search messages',
-                icon: Icons.search,
+
+            const SizedBox(height: 10),
+
+            Container(
+              width: 60,
+              height: 60,
+              padding: const EdgeInsets.all(7.27),
+              decoration: BoxDecoration(
+                color: appColortheme.paleyellow,
+                borderRadius: BorderRadius.circular(10.39),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(5),
+                child: SvgPicture.asset(AppSvgs.messageDouble,
+                  width: 20,
+                  height: 20,
+                  colorFilter: ColorFilter.mode(appColortheme.burntYellow, BlendMode.srcIn),
+                ),
               ),
             ),
-            const SizedBox(height: 10),
+            
+            Text('No messages yet', style: appTextThemeProvider.headingBlack(context, fontSize: 16),),
+
+            SizedBox(height: 6,),
+            SizedBox(width: 308,child: Text(
+                'Message Adaeze\'s teachers or the school office. \nReplies come here and to your notifications.',
+              textAlign: TextAlign.center,
+              style: appTextThemeProvider.body3ColorText(appColortheme),
+            )),
+            SizedBox(height: 32,),
             Expanded(
               child: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 14),
                 children: [
-                  ...messages.map((item) => _messageTile(item)),
-                  const SizedBox(height: 8),
+
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 6),
                     child: greenButton(
                       label: 'New message',
                       icon: Icons.add,
                       onTap: () =>
-                      showModalBottomSheet(context: context,
-                          builder: (context) => NewMessageBottomSheet()),
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => const LoginScreen()
+                              //const NewMessageScreen(),
+                            ),
+                          ),
                     ),
                   ),
                 ],

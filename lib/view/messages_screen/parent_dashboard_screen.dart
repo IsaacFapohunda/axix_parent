@@ -7,6 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_text_styles.dart';
+import '../academics_screen/academic_home_screen.dart';
 import '../home_screens/home_screen.dart';
 import '../more_screens/profile_screen.dart';
 import '../more_screens/settings_screen.dart';
@@ -29,7 +30,8 @@ class _ParentDashboardScreenState
   late final List<Widget> screens = [
     ParentHomeScreen(),
     //const PlaceholderTabScreen(title: 'Home'),
-    const PlaceholderTabScreen(title: 'Academics'),
+    const ParentAcademicsScreen(),
+    //const PlaceholderTabScreen(title: 'Academics'),
     const PlaceholderTabScreen(title: 'Fees'),
     const ParentMessagesScreen(),
     ProfileScreen(

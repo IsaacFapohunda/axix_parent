@@ -1,6 +1,8 @@
-
 import 'package:flutter/material.dart';
 
+import '../report_download_screen.dart';
+import '../report_downloading_screen.dart';
+import '../reportcard_preview_screen.dart';
 import '../switch _child_screen.dart';
 
 
@@ -70,9 +72,9 @@ class _ReportCardsTabState extends State<ReportCardsTab> {
   void Function(Map<String, dynamic> report)? onOpenPdf;
   void Function(Map<String, dynamic> report)? onSharePdf;
 
-  Future<void> _openPreview(Map<String, dynamic> report) async {
+  Future<void> openPreview(Map<String, dynamic> report) async {
     if (report['isWithheld'] == true) {
-      _showWithheldMessage();
+      showWithheldMessage();
       return;
     }
 
@@ -84,7 +86,7 @@ class _ReportCardsTabState extends State<ReportCardsTab> {
     );
   }
 
-  void _showWithheldMessage() {
+  void showWithheldMessage() {
     showModalBottomSheet<void>(
       context: context,
       backgroundColor: Colors.transparent,
@@ -150,7 +152,7 @@ class _ReportCardsTabState extends State<ReportCardsTab> {
   Future<void> _downloadReport(Map<String, dynamic> report) async {
     if (report['isWithheld'] == true ||
         (report['isLatest'] == true && latestReportWithheld)) {
-      _showWithheldMessage();
+      showWithheldMessage();
       return;
     }
 
@@ -259,7 +261,7 @@ class _ReportCardsTabState extends State<ReportCardsTab> {
               final isWithheld = report['isWithheld'] == true ||
                   (report['isLatest'] == true && latestReportWithheld);
 
-              return _reportRow(report, isWithheld);
+              return reportRow(report, isWithheld);
             }).toList(),
           ),
         ),
@@ -343,71 +345,10 @@ class _ReportCardsTabState extends State<ReportCardsTab> {
     );
   }
 
-  Widget _withheldCard(Map<String, dynamic> report) {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: const Color(0xFFFFF7E8),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFFFFE5B4)),
-      ),
-      child: Column(
-        children: [
-          const Row(
-            children: [
-              Icon(Icons.lock_outline, color: Color(0xFFE89A25)),
-              SizedBox(width: 10),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Report card is withheld',
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
-                    SizedBox(height: 4),
-                    Text(
-                      'Released once outstanding fees are paid.',
-                      style: TextStyle(
-                        fontSize: 10,
-                        color: Color(0xFFB87916),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          SizedBox(
-            width: double.infinity,
-            height: 40,
-            child: ElevatedButton(
-              onPressed: () {
-                if (onPayOutstandingFees != null) {
-                  onPayOutstandingFees!();
-                } else {
-                  _showWithheldMessage();
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF197B4B),
-                foregroundColor: Colors.white,
-              ),
-              child: const Text('Pay outstanding fees'),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
-  Widget _reportRow(Map<String, dynamic> report, bool withheld) {
+  Widget reportRow(Map<String, dynamic> report, bool withheld) {
     return InkWell(
-      onTap: () => _openPreview(report),
+      onTap: () => openPreview(report),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 13),
         decoration: const BoxDecoration(
@@ -459,7 +400,7 @@ class _ReportCardsTabState extends State<ReportCardsTab> {
             IconButton(
               tooltip: withheld ? 'Report withheld' : 'Download report card',
               onPressed: withheld
-                  ? _showWithheldMessage
+                  ? showWithheldMessage
                   : () => _downloadReport(report),
               icon: Icon(
                 withheld ? Icons.lock_outline : Icons.download_outlined,
@@ -471,6 +412,68 @@ class _ReportCardsTabState extends State<ReportCardsTab> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _withheldCard(Map<String, dynamic> report) {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: const Color(0xFFFFF7E8),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFFFFE5B4)),
+      ),
+      child: Column(
+        children: [
+          const Row(
+            children: [
+              Icon(Icons.lock_outline, color: Color(0xFFE89A25)),
+              SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Report card is withheld',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    SizedBox(height: 4),
+                    Text(
+                      'Released once outstanding fees are paid.',
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: Color(0xFFB87916),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          SizedBox(
+            width: double.infinity,
+            height: 40,
+            child: ElevatedButton(
+              onPressed: () {
+                if (onPayOutstandingFees != null) {
+                  onPayOutstandingFees!();
+                } else {
+                  showWithheldMessage();
+                }
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF197B4B),
+                foregroundColor: Colors.white,
+              ),
+              child: const Text('Pay outstanding fees'),
+            ),
+          ),
+        ],
       ),
     );
   }

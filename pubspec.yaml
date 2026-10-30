@@ -39,7 +39,7 @@ dependencies:
   dio: ^5.11.1
   shared_preferences: ^2.5.3
   flutter_riverpod: ^2.6.1
-  file_picker: ^11.0.3
+  file_picker: ^8.1.1
 
 
 dev_dependencies:
@@ -52,7 +52,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
-  flutter_gen: ^5.13.0+1
+  #flutter_gen: ^5.13.0+1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

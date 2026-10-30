@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 Widget greenButton({
   required String label,
-  required VoidCallback onTap,
+  VoidCallback? onTap,
   IconData? icon,
 }) {
   return SizedBox(

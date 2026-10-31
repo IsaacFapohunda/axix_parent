@@ -24,14 +24,17 @@ class PayInvoiceBottomSheet extends ConsumerWidget {
       amount: invoice.outstanding,
       onCard: () {
         Navigator.pop(context);
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => CardPaymentScreen(
-              invoice: invoice,
-            ),
+
+        showModalBottomSheet(
+          context: context,
+          isScrollControlled: true,
+          backgroundColor: Colors.transparent,
+          builder: (_) => CardPaymentScreen(
+            invoice: invoice,
           ),
         );
+
+
       },
       onWallet: () {
         fees.payFromWallet(invoice, invoice.outstanding);
@@ -40,13 +43,13 @@ class PayInvoiceBottomSheet extends ConsumerWidget {
       },
       onBank: () {
         Navigator.pop(context);
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => BankTransferScreen(
-              amount: invoice.outstanding,
-              invoice: invoice,
-            ),
+        showModalBottomSheet(
+          context: context,
+          isScrollControlled: true,
+          backgroundColor: Colors.transparent,
+          builder: (_) => BankTransferScreen(
+            amount: invoice.outstanding,
+            invoice: invoice,
           ),
         );
       },

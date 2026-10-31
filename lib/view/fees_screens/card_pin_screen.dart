@@ -1,12 +1,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_text_styles.dart';
 import '../../model/fees/fees_data.dart';
 import '../messages_screen/messages_widget/green_button.dart';
 import 'otp_verfication_screen.dart';
 
-class CardPinScreen extends StatefulWidget {
+class CardPinScreen extends ConsumerStatefulWidget {
   final FeeInvoice? invoice;
   final bool payAll;
 
@@ -17,10 +20,10 @@ class CardPinScreen extends StatefulWidget {
   });
 
   @override
-  State<CardPinScreen> createState() => _CardPinScreenState();
+  ConsumerState<CardPinScreen> createState() => _CardPinScreenState();
 }
 
-class _CardPinScreenState extends State<CardPinScreen> {
+class _CardPinScreenState extends ConsumerState<CardPinScreen> {
   final pinController = TextEditingController();
 
   @override
@@ -31,30 +34,27 @@ class _CardPinScreenState extends State<CardPinScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF7F7F7),
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: const Text(
-          'Fees',
-          style: TextStyle(fontSize: 15),
+
+    final size = MediaQuery.of(context).size;
+    final theme = ref.watch(appThemeProvider);
+    final textTheme = ref.watch(appTextProvider);
+
+
+    return SafeArea(
+      child: Container(
+        padding: EdgeInsets.fromLTRB(
+          18,
+          18,
+          18,
+          MediaQuery.of(context).viewInsets.bottom + 20,
         ),
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(Icons.arrow_back_ios_new, size: 18),
-        ),
-      ),
-      body: Align(
-        alignment: Alignment.bottomCenter,
-        child: Container(
-          width: double.infinity,
-          padding: const EdgeInsets.fromLTRB(20, 24, 20, 30),
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(18),
-            ),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(18),
           ),
+        ),
+        child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,20 +83,176 @@ class _CardPinScreenState extends State<CardPinScreen> {
                 ),
               ),
               const SizedBox(height: 25),
-              TextField(
-                controller: pinController,
-                obscureText: true,
-                textAlign: TextAlign.center,
-                keyboardType: TextInputType.number,
-                inputFormatters: [
-                  FilteringTextInputFormatter.digitsOnly,
-                  LengthLimitingTextInputFormatter(4),
-                ],
-                decoration: const InputDecoration(
-                  hintText: '••••',
-                  border: OutlineInputBorder(),
+
+
+              Center(
+                child: SizedBox(
+                  width: size.width*0.5,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: theme.greyBorderColor,
+                        ),
+                        width: 30,
+                        height: 30,
+                        child: Center(
+                            child: TextFormField(
+                              onChanged: (value) {
+                                setState(() {
+                                  // String nevalue = ("$code$value");
+                                  // code = nevalue;
+                                });
+                                if (value.length == 1) {
+                                  FocusScope.of(context).nextFocus();
+                                }
+                              },
+                              decoration: const InputDecoration(
+                                isDense: true,
+                                contentPadding: EdgeInsets.zero,
+                                border: InputBorder.none,
+                              ),
+                              textAlign: TextAlign.center,
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                LengthLimitingTextInputFormatter(1),
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
+                            )),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: theme.greyBorderColor,
+                        ),
+                        width: 30,
+                        height: 30,
+                        child: Center(
+                            child: TextFormField(
+                              onChanged: (value) {
+                                setState(() {
+                                  // String nevalue = ("$code$value");
+                                  //
+                                  // code = nevalue;
+                                });
+                                if (value.length == 1) {
+                                  FocusScope.of(context).nextFocus();
+                                } else {
+                                  if (value.isEmpty) {
+                                    FocusScope.of(context).previousFocus();
+                                  }
+                                }
+                              },
+                              onSaved: (newValue3) {},
+                              decoration: const InputDecoration(
+                                isDense: true,
+                                contentPadding: EdgeInsets.zero,
+                                border: InputBorder.none,
+                              ),
+                              textAlign: TextAlign.center,
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                LengthLimitingTextInputFormatter(1),
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
+                            )),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(40),
+                          color: theme.greyBorderColor,
+                        ),
+                        width: 30,
+                        height: 30,
+                        child: Center(
+                            child: TextFormField(
+                              onChanged: (value) {
+                                setState(() {
+                                  // String nevalue = ("$code$value");
+                                  //
+                                  // code = nevalue;
+                                });
+                                if (value.length == 1) {
+                                  FocusScope.of(context).nextFocus();
+                                } else {
+                                  if (value.isEmpty) {
+                                    FocusScope.of(context).previousFocus();
+                                  }
+                                }
+                              },
+                              onSaved: (newValue3) {},
+                              decoration: const InputDecoration(
+                                isDense: true,
+                                contentPadding: EdgeInsets.zero,
+                                border: InputBorder.none,
+                              ),
+                              textAlign: TextAlign.center,
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                LengthLimitingTextInputFormatter(1),
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
+                            )),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(40),
+                          color: theme.greyBorderColor,
+                        ),
+                        width: 30,
+                        height: 30,
+                        child: Center(
+                            child: TextFormField(
+                              onChanged: (value) {
+                                setState(() {
+                                  // String nevalue = ("$code$value");
+                                  //
+                                  // code = nevalue;
+                                });
+                                if (value.length == 1) {
+                                  FocusScope.of(context).nextFocus();
+                                } else {
+                                  if (value.isEmpty) {
+                                    FocusScope.of(context).previousFocus();
+                                  }
+                                }
+                              },
+                              onSaved: (newValue3) {},
+                              decoration: const InputDecoration(
+                                isDense: true,
+                                contentPadding: EdgeInsets.zero,
+                                border: InputBorder.none,
+                              ),
+                              textAlign: TextAlign.center,
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                LengthLimitingTextInputFormatter(1),
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
+                            )),
+                      ),
+
+                    ],
+                  ),
                 ),
               ),
+
+              // TextField(
+              //   controller: pinController,
+              //   obscureText: true,
+              //   textAlign: TextAlign.center,
+              //   keyboardType: TextInputType.number,
+              //   inputFormatters: [
+              //     FilteringTextInputFormatter.digitsOnly,
+              //     LengthLimitingTextInputFormatter(4),
+              //   ],
+              //   decoration: const InputDecoration(
+              //     hintText: '••••',
+              //     border: OutlineInputBorder(),
+              //   ),
+              // ),
               const SizedBox(height: 20),
               Container(
                 padding: const EdgeInsets.all(12),

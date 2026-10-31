@@ -33,14 +33,20 @@ class BankTransferScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF7F7F7),
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: const Text('Fees', style: TextStyle(fontSize: 15)),
-      ),
-      body: Align(
-        alignment: Alignment.bottomCenter,
+    return SafeArea(
+      child: Container(
+        padding: EdgeInsets.fromLTRB(
+          18,
+          18,
+          18,
+          MediaQuery.of(context).viewInsets.bottom + 20,
+        ),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(18),
+          ),
+        ),
         child: Container(
           width: double.infinity,
           padding: const EdgeInsets.all(20),
@@ -99,17 +105,7 @@ class BankTransferScreen extends StatelessWidget {
                 onCopy: () => _copy(context, amount.toStringAsFixed(0)),
               ),
               const SizedBox(height: 14),
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFF2F4F7),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Text(
-                  "This is a demonstration account. No actual transfer or payment verification takes place.",
-                  style: TextStyle(fontSize: 10),
-                ),
-              ),
+
               const SizedBox(height: 18),
               greenButton(
                 label: "I've sent the money",

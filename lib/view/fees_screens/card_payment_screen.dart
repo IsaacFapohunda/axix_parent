@@ -38,168 +38,192 @@ class _CardPaymentScreenState extends State<CardPaymentScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF7F7F7),
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: const Text(
-          'Fees',
-          style: TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w700,
+    return SafeArea(
+      child: Container(
+       // backgroundColor: const Color(0xFFF7F7F7),
+        padding: EdgeInsets.fromLTRB(
+          18,
+          18,
+          18,
+          MediaQuery.of(context).viewInsets.bottom + 20,
+        ),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(18),
           ),
         ),
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(Icons.arrow_back_ios_new, size: 18),
-        ),
-      ),
-      body: ListView(
-        padding: const EdgeInsets.all(18),
-        children: [
-          const Text(
-            'Pay by card',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          const SizedBox(height: 5),
-          const Text(
-            'Enter your card details',
-            style: TextStyle(
-              fontSize: 11,
-              color: Color(0xFF98A2B3),
-            ),
-          ),
-          const SizedBox(height: 20),
-
-          Container(
-            height: 125,
-            padding: const EdgeInsets.all(18),
-            decoration: BoxDecoration(
-              color: const Color(0xFF16834E),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Align(
-                  alignment: Alignment.topRight,
-                  child: Text(
-                    'CARD',
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Pay by card',
                     style: TextStyle(
-                      color: Colors.white,
+                      fontSize: 16,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-                ),
-                Text(
-                  cardNumberController.text.isEmpty
-                      ? '•••• •••• •••• ••••'
-                      : cardNumberController.text,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
+                  IconButton(
+                    onPressed: () => Navigator.pop(context),
+                    icon: const Icon(Icons.close),
                   ),
+                ],
+              ),
+              const SizedBox(height: 2),
+              const Text(
+                'Enter your card details',
+                style: TextStyle(
+                  fontSize: 11,
+                  color: Color(0xFF98A2B3),
                 ),
-                Text(
-                  nameController.text.isEmpty
-                      ? 'CARDHOLDER NAME'
-                      : nameController.text.toUpperCase(),
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 10,
-                  ),
+              ),
+              const SizedBox(height: 20),
+
+              Container(
+                height: 125,
+                padding: const EdgeInsets.all(18),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF16834E),
+                  borderRadius: BorderRadius.circular(12),
                 ),
-              ],
-            ),
-          ),
-
-          const SizedBox(height: 20),
-
-          _label('Card number'),
-          _input(
-            controller: cardNumberController,
-            hint: '0000 0000 0000 0000',
-            keyboardType: TextInputType.number,
-            formatters: [
-              FilteringTextInputFormatter.digitsOnly,
-              LengthLimitingTextInputFormatter(19),
-            ],
-          ),
-
-          const SizedBox(height: 15),
-
-          Row(
-            children: [
-              Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    _label('Expiry'),
-                    _input(
-                      controller: expiryController,
-                      hint: 'MM/YY',
-                      keyboardType: TextInputType.number,
-                      formatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                        LengthLimitingTextInputFormatter(4),
-                      ],
+                    const Align(
+                      alignment: Alignment.topRight,
+                      child: Text(
+                        'CARD',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      cardNumberController.text.isEmpty
+                          ? '•••• •••• •••• ••••'
+                          : cardNumberController.text,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    Text(
+                      nameController.text.isEmpty
+                          ? 'CARDHOLDER NAME'
+                          : nameController.text.toUpperCase(),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                      ),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _label('CVV'),
-                    _input(
-                      controller: cvvController,
-                      hint: '000',
-                      keyboardType: TextInputType.number,
-                      obscure: true,
-                      formatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                        LengthLimitingTextInputFormatter(4),
+
+              const SizedBox(height: 20),
+
+              _label('Card number'),
+              _input(
+                controller: cardNumberController,
+                hint: '0000 0000 0000 0000',
+                keyboardType: TextInputType.number,
+                formatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                  LengthLimitingTextInputFormatter(19),
+                ],
+              ),
+
+              const SizedBox(height: 15),
+
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _label('Expiry'),
+                        _input(
+                          controller: expiryController,
+                          hint: 'MM/YY',
+                          keyboardType: TextInputType.number,
+                          formatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            LengthLimitingTextInputFormatter(4),
+                          ],
+                        ),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _label('CVV'),
+                        _input(
+                          controller: cvvController,
+                          hint: '000',
+                          keyboardType: TextInputType.number,
+                          obscure: true,
+                          formatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            LengthLimitingTextInputFormatter(4),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 15),
+
+              _label('Name on card'),
+              _input(
+                controller: nameController,
+                hint: 'Cardholder name',
+                keyboardType: TextInputType.name,
+              ),
+
+              const SizedBox(height: 25),
+
+              greenButton(
+                label: 'Continue',
+                onTap: () {
+
+                  Navigator.pop(context);
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
+                    builder: (_) => CardPinScreen(
+                      invoice: widget.invoice,
+                      payAll: widget.payAll,
+                    ),
+                  );
+
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (_) => CardPinScreen(
+                  //       invoice: widget.invoice,
+                  //       payAll: widget.payAll,
+                  //     ),
+                  //   ),
+                  // );
+                },
               ),
             ],
           ),
-
-          const SizedBox(height: 15),
-
-          _label('Name on card'),
-          _input(
-            controller: nameController,
-            hint: 'Cardholder name',
-            keyboardType: TextInputType.name,
-          ),
-
-          const SizedBox(height: 25),
-
-          greenButton(
-            label: 'Continue',
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => CardPinScreen(
-                    invoice: widget.invoice,
-                    payAll: widget.payAll,
-                  ),
-                ),
-              );
-            },
-          ),
-        ],
+        ),
       ),
     );
   }
